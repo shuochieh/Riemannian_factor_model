@@ -189,7 +189,8 @@ mean_on_sphere = function (x, tau = 0.1, tol = 1e-8, max.iter = 1000, verbose = 
   mu = x[sample(n, 1),]
   for (i in 1:max.iter) {
     grad = colMeans(Log_sphere(x, mu))
-    mu_new = Exp_sphere(mu + tau * grad, mu)
+    # mu_new = Exp_sphere(mu + tau * grad, mu)
+    mu_new = Exp_sphere(tau * grad, mu)
     
     temp = c(x %*% mu_new / sqrt(rowSums(x^2)))
     if (any(temp > 1.01) || any(temp < -1.01)) {
